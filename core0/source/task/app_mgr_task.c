@@ -1,6 +1,6 @@
 
 /*
- * wear_task.c
+ * app_mgr_task.c
  *
  *  Created on: 2019年6月17日
  *      Author: jace
@@ -130,7 +130,7 @@ static void os_init_pre()
     //外部APP初始化
 //    external_app_init();
 
-    //APP重新，字库添加到系统列表
+    //APP重装，字库添加到系统列表
 //    app_reload();
 
 //    os_font_print_all();

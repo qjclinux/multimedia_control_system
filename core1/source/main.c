@@ -1,11 +1,31 @@
-/*
- * Copyright (c) 2015, Freescale Semiconductor, Inc.
- * Copyright 2016-2017 NXP
- * All rights reserved.
+/**
+ ****************************************************************************************
  *
- * SPDX-License-Identifier: BSD-3-Clause
+ * @file main.c
+ *
+ *   基于LPC55S69 双核MCU平台的多媒体控制系统，3.2寸触摸彩屏，系统搭载jace GUI、jace FS ，
+ *   高效的Code使得系统操作效果非常流畅。
+ *
+ *   本系统功能完整，配合灯光积木使用，可控制灯光效果。
+ *
+ * JUST FOR :
+ *      NXP MCU挑战赛
+ *
+ *
+ *      作者：jace
+ *      email:734136032@qq.com
+ *
+ *      本工程jace GUI、jace FS 为jace本人发明，暂时不开源，如有兴趣，可与本人取得联系。
+ *      当然，此工程的lib、源码可在不经过本人同意的情况下随意使用。
+ *
+ *
+ *  date:2019.12.31
+ *
+ *      祝大家新快乐！
+ *
+ *
+ ****************************************************************************************
  */
-
 #include "board.h"
 #include "mcmgr.h"
 
@@ -16,32 +36,6 @@
 #include "pin_mux.h"
 #include "hs_spi.h"
 
-
-/*******************************************************************************
- * Definitions
- ******************************************************************************/
-//#define LED_INIT() GPIO_PinInit(GPIO, BOARD_LED_RED_GPIO_PORT, BOARD_LED_RED_GPIO_PIN, &led_config);
-//#define LED_TOGGLE() GPIO_PortToggle(GPIO, BOARD_LED_RED_GPIO_PORT, 1u << BOARD_LED_RED_GPIO_PIN);
-
-/*******************************************************************************
- * Prototypes
- ******************************************************************************/
-
-/*******************************************************************************
- * Code
- ******************************************************************************/
-
-/*!
- * @brief Function to create delay for Led blink.
- */
-void delay(void)
-{
-    volatile uint32_t i = 0;
-    for (i = 0; i < 1000000; ++i)
-    {
-        __asm("NOP"); /* delay */
-    }
-}
 
 /*!
  * @brief Application-specific implementation of the SystemInitHook() weak function.
@@ -68,16 +62,8 @@ static void RPMsgRemoteReadyEventHandler(uint16_t eventData, void *context)
 int main(void)
 {
     static uint16_t *gui_fb;
-    uint32_t startupData
-//    ,i
-    ;
+    uint32_t startupData;
     mcmgr_status_t status;
-
-    /* Define the init structure for the output LED pin*/
-//    gpio_pin_config_t led_config = {
-//        kGPIO_DigitalOutput,
-//        0,
-//    };
 
     BOARD_BootClockPLL150M();
 
@@ -97,15 +83,11 @@ int main(void)
 
     /* Make a noticable delay after the reset */
 
-
-
     /* Init board hardware.*/
+
     /* enable clock for GPIO */
     CLOCK_EnableClock(kCLOCK_Gpio0);
     CLOCK_EnableClock(kCLOCK_Gpio1);
-
-    /* Configure LED */
-//    LED_INIT();
 
 
     CLOCK_AttachClk(kMAIN_CLK_to_HSLSPI);/* attach 50 MHz clock to HSLSPI */
@@ -121,9 +103,6 @@ int main(void)
 
     while (1)
     {
-//        delay();
-//        LED_TOGGLE();
-
         /*
          * 等待Core0的通知，然后处理事件
          */
