@@ -40,10 +40,16 @@
  * See http://www.freertos.org/a00110.html.
  *----------------------------------------------------------*/
 
+/*
+ * ¹¦ºÄ¹ÜÀí
+ */
+extern void prvSystemSleep( uint32_t xExpectedIdleTime );
+#define portSUPPRESS_TICKS_AND_SLEEP( x )       prvSystemSleep( x )
+#define configUSE_TICKLESS_IDLE                 2
+
 #define configUSE_PREEMPTION                    1
-#define configUSE_TICKLESS_IDLE                 0
 #define configCPU_CLOCK_HZ                      (SystemCoreClock)
-#define configTICK_RATE_HZ                      500 //((TickType_t)200)
+#define configTICK_RATE_HZ                      ((TickType_t)200)//500
 #define configMAX_PRIORITIES                    5
 #define configMINIMAL_STACK_SIZE                (128)   //((unsigned short)90)
 #define configMAX_TASK_NAME_LEN                 20

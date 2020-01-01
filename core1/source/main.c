@@ -35,7 +35,7 @@
 #include "lcd_hw_drv.h"
 #include "pin_mux.h"
 #include "hs_spi.h"
-
+#include "fsl_power.h"
 
 /*!
  * @brief Application-specific implementation of the SystemInitHook() weak function.
@@ -118,5 +118,6 @@ int main(void)
             RPMsgRemoteReadyEventData=0;
         }
 
+        POWER_EnterSleep();
     }
 }
